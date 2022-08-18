@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { IApplicationState } from '../../store';
@@ -18,6 +18,14 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size={'large'} />
+      </View>
+    );
+  }
 
   const handleOnPress = (product: IProductModel) => {
     console.log(JSON.stringify(product, null, 2));
