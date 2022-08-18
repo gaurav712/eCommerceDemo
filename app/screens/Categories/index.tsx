@@ -8,7 +8,7 @@ import { IProductModel } from '../../store/products/types';
 
 import { styles } from './styles';
 
-const Home = () => {
+const Categories = () => {
   const dispatch: Dispatch = useDispatch();
   const { productList, isLoading } = useSelector(
     (state: IApplicationState) => state.productsReducer,
@@ -46,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Categories;

@@ -1,15 +1,14 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import AppWithNavigation from './app/navigation';
 import store from './app/store';
-import Home from './app/screens/Home';
 
 const App = () => {
-
   return (
     <Provider store={store}>
-      <Home/>
+      <AppWithNavigation />
     </Provider>
-    )
+  );
 };
 
-export default App
+export default App;
