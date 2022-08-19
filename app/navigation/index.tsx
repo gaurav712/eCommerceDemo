@@ -13,8 +13,20 @@ const AppWithNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Categories" component={MainScreen} />
-        <Stack.Screen name="List" component={ProductListScreen} />
-        <Stack.Screen name="Details" component={ProductDetailsScreen} />
+        <Stack.Screen
+          name="List"
+          component={ProductListScreen}
+          options={{
+            title: 'Browse Products',
+          }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={ProductDetailsScreen}
+          options={{
+            title: 'Product Details',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
