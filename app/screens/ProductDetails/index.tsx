@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
+import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { IProductModel } from '../../store/products/types';
+import { styles } from './styles';
 
 const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any> }) => {
   const [product, setProduct] = useState<IProductModel>();
@@ -15,7 +17,18 @@ const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any
     }
   }, [navigation]);
 
-  return <></>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Image style={styles.image} source={{ uri: product?.image }} />
+        <View style={styles.infoContainer}>
+          <Text style={styles.title}>{product?.title}</Text>
+          <Text style={styles.price}>₹{product?.price}</Text>
+          <Text style={styles.description}>{product?.description}</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 export default ProductDetails;
