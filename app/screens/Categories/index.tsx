@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect } from 'react';
 import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,21 +28,33 @@ const Categories = () => {
     );
   }
 
-  const handleOnPress = (product: IProductModel) => {
-    console.log(JSON.stringify(product, null, 2));
+  const groupByKey = (_data: IProductModel[], _key: string) => {
+    return _data.reduce((result: IProductModel, next: IProductModel) => {
+      const key = next[_key];
+      result[key] = result[key]?.length ? [...result[key], next] : [next];
+      return result;
+    }, {});
   };
 
-  const Item = ({ product }: { product: IProductModel }) => (
-    <Pressable style={styles.itemContainer} onPress={() => handleOnPress(product)}>
-      <Text style={styles.itemTitle}>{product.title}</Text>
+  const handleOnPress = (category: string) => {
+    console.log(category);
+  };
+
+  const Item = ({ category }: { category: string }) => (
+    <Pressable style={styles.itemContainer} onPress={() => handleOnPress(category)}>
+      <Text style={styles.itemTitle}>{category}</Text>
     </Pressable>
   );
 
-  const renderItem = ({ item }: { item: IProductModel }) => <Item product={item} />;
+  const renderItem = ({ item }: { item: string }) => <Item category={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList data={productList} renderItem={renderItem} keyExtractor={(item) => item.id} />
+      <FlatList
+        data={Object.keys(groupByKey(productList, 'category'))}
+        renderItem={renderItem}
+        keyExtractor={(item) => item}
+      />
     </SafeAreaView>
   );
 };
