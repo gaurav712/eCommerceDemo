@@ -1,18 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, SafeAreaView, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useSelector } from 'react-redux';
 import { IApplicationState } from '../../store';
 import { IProductModel } from '../../store/products/types';
 
 import { styles } from './styles';
 
 const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }) => {
-  const dispatch: Dispatch = useDispatch();
-  const { productList, isLoading } = useSelector(
-    (state: IApplicationState) => state.productsReducer,
-  );
+  const { productList } = useSelector((state: IApplicationState) => state.productsReducer);
 
   const [category, setCategory] = useState('');
 
