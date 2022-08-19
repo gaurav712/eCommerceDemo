@@ -9,7 +9,7 @@ import { IProductModel } from '../../store/products/types';
 
 import { styles } from './styles';
 
-const Categories = () => {
+const Categories = ({ navigation }) => {
   const dispatch: Dispatch = useDispatch();
   const { productList, isLoading } = useSelector(
     (state: IApplicationState) => state.productsReducer,
@@ -37,7 +37,9 @@ const Categories = () => {
   };
 
   const handleOnPress = (category: string) => {
-    console.log(category);
+    navigation.navigate('List', {
+      category,
+    });
   };
 
   const Item = ({ category }: { category: string }) => (
