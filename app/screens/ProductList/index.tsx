@@ -23,7 +23,8 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
   }, [navigation]);
 
   const handleOnPress = (product: IProductModel) => {
-    console.log(JSON.stringify(product, null, 2));
+    //@ts-ignore
+    navigation.navigate('Details', { product });
   };
 
   const Item = ({ product }: { product: IProductModel }) => (
