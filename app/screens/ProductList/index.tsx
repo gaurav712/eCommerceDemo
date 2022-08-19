@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, SafeAreaView, Text } from 'react-native';
+import { FlatList, Image, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from '../../store';
 import { IProductModel } from '../../store/products/types';
@@ -30,7 +30,10 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
   const Item = ({ product }: { product: IProductModel }) => (
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(product)}>
       <Image source={{ uri: product.image }} style={styles.image} />
-      <Text style={styles.itemTitle}>{product.title}</Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.itemTitle}>{product.title}</Text>
+        <Text style={styles.price}>₹{product.price}</Text>
+      </View>
     </Pressable>
   );
 

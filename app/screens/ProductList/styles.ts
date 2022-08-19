@@ -22,8 +22,14 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     resizeMode: 'contain',
   },
-  itemTitle: {
+  infoContainer: {
     paddingHorizontal: 20,
+  },
+  itemTitle: {
     maxWidth: '80%',
+  },
+  price: {
+    fontWeight: 'bold',
+    color: 'green',
   },
 });
