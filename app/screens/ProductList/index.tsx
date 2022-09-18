@@ -29,10 +29,10 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
 
   const Item = ({ product }: { product: IProductModel }) => (
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(product)}>
-      <Image source={{ uri: product.image }} style={styles.image} />
+      <Image source={{ uri: product.imagePath }} style={styles.image} />
       <View style={styles.infoContainer}>
-        <Text style={styles.itemTitle}>{product.title}</Text>
-        <Text style={styles.price}>₹{product.price}</Text>
+        <Text style={styles.itemTitle}>{product.productName}</Text>
+        <Text style={styles.price}>₹{product.unitPrice}</Text>
       </View>
     </Pressable>
   );
@@ -44,7 +44,7 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
       <FlatList
         data={productList.filter((item) => item.category === category)}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
       />
     </SafeAreaView>
   );

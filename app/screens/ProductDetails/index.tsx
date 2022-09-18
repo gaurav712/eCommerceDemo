@@ -20,10 +20,10 @@ const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Image style={styles.image} source={{ uri: product?.image }} />
+        <Image style={styles.image} source={{ uri: product?.imagePath }} />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{product?.title}</Text>
-          <Text style={styles.price}>₹{product?.price}</Text>
+          <Text style={styles.title}>{product?.productName}</Text>
+          <Text style={styles.price}>₹{product?.unitPrice}</Text>
           <Text style={styles.description}>{product?.description}</Text>
         </View>
       </ScrollView>

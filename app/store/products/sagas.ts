@@ -1,25 +1,32 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { all } from '@redux-saga/core/effects';
-import { getProducts } from './services';
+import { getProducts, getCategories } from './services';
 import { actionTypes, IError, IProductModel } from './types';
-
-const categories = ['Category First', 'Category Second', 'Category Third'];
 
 /*function generator implementations of Saga */
 function* fetchingProducts() {
   try {
-    let { data }: { data: IProductModel[] } = yield call(getProducts); // saga
+    const { data }: { data: IProductModel[] } = yield call(getProducts); // saga
 
-    // randomly assign some category
-    data = data.map((product) => ({
-      ...product,
-      category: categories[Math.floor(Math.random() * 3)],
-    }));
-
-    yield put({ type: actionTypes.FETCH_PRODUCTS_SUCCESS, payload: data });
+    yield put({ type: actionTypes.FETCH_PRODUCTS_SUCCESS, payload: data.products });
   } catch (e) {
     yield put({
       type: actionTypes.FETCH_PRODUCTS_FAILURE,
+      payload: (e as IError).message,
+    });
+  }
+}
+
+function* fetchingCategories() {
+  try {
+    const { data }: { data: any } = yield call(getCategories); // saga
+
+    if(!data?.status) throw 'failed to fetch categories!';
+
+    yield put({ type: actionTypes.FETCH_CATEGORIES_SUCCESS, payload: data.categories });
+  } catch (e) {
+    yield put({
+      type: actionTypes.FETCH_CATEGORIES_FAILURE,
       payload: (e as IError).message,
     });
   }
@@ -29,8 +36,11 @@ function* fetchingProducts() {
 function* watchFetchingProducts() {
   yield takeEvery(actionTypes.FETCH_PRODUCTS_PENDING, fetchingProducts);
 }
+function* watchFetchingCategories() {
+  yield takeEvery(actionTypes.FETCH_CATEGORIES_PENDING, fetchingCategories);
+}
 
 /* Saga sends all the watchers to the sagaMiddleware to run. */
 export function* productsSaga() {
-  yield all([watchFetchingProducts()]);
+  yield all([watchFetchingProducts(), watchFetchingCategories()]);
 }

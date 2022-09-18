@@ -1,24 +1,42 @@
 //@ts-nocheck
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { IApplicationState } from '../../store';
-import { fetchProducts } from '../../store/products/actions';
+import { login } from '../../store/auth/actions';
+import { fetchCategories, fetchProducts } from '../../store/products/actions';
 import { IProductModel } from '../../store/products/types';
 
 import { styles } from './styles';
 
 const Categories = ({ navigation }) => {
   const dispatch: Dispatch = useDispatch();
-  const { productList, isLoading } = useSelector(
+  const { loginCreds } = useSelector((state: IApplicationState) => state.authReducer);
+  const { categories, isLoading } = useSelector(
     (state: IApplicationState) => state.productsReducer,
   );
 
+  axios.defaults.baseURL = 'http://192.168.1.10:3000/api';
+
   // Get the list of products
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(
+      login({
+        userEmail: 'someone@a.com',
+        password: 'password',
+      }),
+    );
   }, []);
+
+  useEffect(() => {
+    if (loginCreds) {
+      axios.defaults.headers.token = loginCreds.token;
+      dispatch(fetchCategories());
+      dispatch(fetchProducts());
+    }
+  }, [loginCreds]);
 
   if (isLoading) {
     return (
@@ -27,14 +45,6 @@ const Categories = ({ navigation }) => {
       </View>
     );
   }
-
-  const groupByKey = (_data: IProductModel[], _key: string) => {
-    return _data.reduce((result: IProductModel, next: IProductModel) => {
-      const key = next[_key];
-      result[key] = result[key]?.length ? [...result[key], next] : [next];
-      return result;
-    }, {});
-  };
 
   const handleOnPress = (category: string) => {
     navigation.navigate('List', {
@@ -53,9 +63,9 @@ const Categories = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={Object.keys(groupByKey(productList, 'category'))}
+        data={categories}
         renderItem={renderItem}
-        keyExtractor={(item) => item}
+        keyExtractor={(item, index) => index}
       />
     </SafeAreaView>
   );
