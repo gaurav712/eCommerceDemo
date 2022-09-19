@@ -24,6 +24,13 @@ export const authReducer = (state = initialState, action: IAction) => {
       return { ...state, isLoading: false, loginCreds: action.payload };
     case actionTypes.AUTH_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
+
+    case actionTypes.ADD_CART_PENDING:
+      return { ...state, isLoading: true };
+    case actionTypes.ADD_CART_SUCCESS:
+      return { ...state, isLoading: false, categories: action.payload };
+    case actionTypes.ADD_CART_FAILURE:
+      return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }

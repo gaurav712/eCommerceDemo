@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../store/auth/actions';
 import { IProductModel } from '../../store/products/types';
 import { styles } from './styles';
 
@@ -17,6 +19,14 @@ const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any
     }
   }, [navigation]);
 
+  const dispatch = useDispatch();
+
+  const handleAddCart = () => {
+    if (product) {
+      dispatch(addToCart(product?._id));
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -26,6 +36,9 @@ const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any
           <Text style={styles.price}>₹{product?.unitPrice}</Text>
           <Text style={styles.description}>{product?.description}</Text>
         </View>
+        <Pressable style={styles.addCart} onPress={handleAddCart}>
+          <Text style={styles.addCartText}>{'Add to Cart'}</Text>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );

@@ -31,4 +31,12 @@ export const styles = StyleSheet.create({
   description: {
     marginTop: 5,
   },
+  addCart: {
+    backgroundColor: 'teal',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  addCartText: {
+    color: '#fff',
+  },
 });
