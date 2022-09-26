@@ -2,9 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import MainScreen from '../screens/Categories';
-import ProductListScreen from '../screens/ProductList';
-import ProductDetailsScreen from '../screens/ProductDetails';
+import HomeStack from './home';
+import AuthStack from './auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,19 +11,18 @@ const AppWithNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Categories" component={MainScreen} />
         <Stack.Screen
-          name="List"
-          component={ProductListScreen}
+          name="Auth"
+          component={AuthStack}
           options={{
-            title: 'Browse Products',
+            headerShown: false,
           }}
         />
         <Stack.Screen
-          name="Details"
-          component={ProductDetailsScreen}
+          name="Home"
+          component={HomeStack}
           options={{
-            title: 'Product Details',
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
