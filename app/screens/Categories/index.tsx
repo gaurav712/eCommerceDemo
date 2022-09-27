@@ -20,16 +20,13 @@ const Categories = ({ navigation }) => {
 
   axios.defaults.baseURL = 'http://192.168.1.10:3000/api';
 
-const _storeToken = async (token) => {
-  try {
-    await AsyncStorage.setItem(
-      'token',
-      token
-    );
-  } catch (error) {
-    console.log('error saving token');
-  }
-};
+  const _storeToken = async (token) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+    } catch (error) {
+      console.log('error saving token');
+    }
+  };
 
   // Get the list of products
   useEffect(() => {
@@ -74,11 +71,7 @@ const _storeToken = async (token) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={categories}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index}
-      />
+      <FlatList data={categories} renderItem={renderItem} keyExtractor={(_, index) => index} />
     </SafeAreaView>
   );
 };
