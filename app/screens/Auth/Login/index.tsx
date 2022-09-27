@@ -34,7 +34,13 @@ const Login = ({ navigation }: { navigation: INavigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.greetingContainer}>
-        <Text style={styles.greeting}>Hello Again!</Text>
+        <View style={styles.greeting}>
+          <Text style={styles.greetingText}>Hello Again</Text>
+          <View style={styles.symbolContainer}>
+            <View style={styles.verticalBar} />
+            <View style={styles.dot} />
+          </View>
+        </View>
         <Text style={styles.greetingSec}>{"Welcome back you've\nbeen missed!"}</Text>
       </View>
       <View style={styles.inputContainer}>
