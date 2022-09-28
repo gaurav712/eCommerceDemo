@@ -1,31 +1,53 @@
-import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import TextInput from '../../../components/TextInput';
+import { IApplicationState } from '../../../store';
+import { login } from '../../../store/auth/actions';
 import { INavigation } from '../../../types';
 
 import styles from './styles';
 
 const Login = ({ navigation }: { navigation: INavigation }) => {
-  const [username, setUsername] = useState('');
-  const [pass, setPass] = useState('');
+  const dispatch = useDispatch();
+  const { loginCreds } = useSelector((state: IApplicationState) => state.authReducer);
+
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const _storeToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+    } catch (error) {
+      console.log('error saving token');
+    }
+  };
 
   const handleChangeUsername = (value: string) => {
-    setUsername(value);
+    setUserEmail(value);
   };
 
   const handleChangePass = (value: string) => {
-    setPass(value);
+    setPassword(value);
   };
 
   const handleRecoverPass = () => {};
 
   const handleLogIn = () => {
     const creds = {
-      username,
-      pass,
+      userEmail,
+      password,
     };
-    console.log(creds);
+    dispatch(login(creds));
   };
+
+  useEffect(() => {
+    if (loginCreds.token) {
+      _storeToken(loginCreds.token);
+      navigation.navigate('Home'); // Authenticated
+    }
+  }, [loginCreds.token]);
 
   const handleRegisterClicked = () => {
     navigation.navigate('SignUp');
@@ -45,14 +67,14 @@ const Login = ({ navigation }: { navigation: INavigation }) => {
       </View>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Enter Username"
-          value={username}
+          placeholder="Enter Email"
+          value={userEmail}
           onChangeText={handleChangeUsername}
         />
         <TextInput
           placeholder="Password"
           secureTextEntry={true}
-          value={pass}
+          value={password}
           onChangeText={handleChangePass}
         />
         <Pressable style={styles.recoveryButton} onPress={handleRecoverPass}>
