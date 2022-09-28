@@ -1,3 +1,3 @@
 export interface INavigation {
-  navigate: (path: string) => unknown;
+  navigate: (path: string, params?: any) => unknown;
 }
