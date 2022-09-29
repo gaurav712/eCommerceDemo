@@ -1,7 +1,8 @@
 /* action creators of Saga */
-import { actionTypes } from './types';
+import { actionTypes, IProductFetchParams } from './types';
 
-export const fetchProducts = () => ({
+export const fetchProducts = (params: IProductFetchParams) => ({
+  params,
   type: actionTypes.FETCH_PRODUCTS_PENDING,
 });
 

@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { IProductFetchParams } from './types';
 
-export const getProducts = async () => {
-  const res = await axios.get('/products');
+export const getProducts = async (params: IProductFetchParams) => {
+  const { category, limit, skip } = params;
+  const res = await axios.get(`/products/${category}/${limit}/${skip}`);
   return res;
 };
 

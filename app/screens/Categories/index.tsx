@@ -3,7 +3,7 @@ import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, View } from
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { IApplicationState } from '../../store';
-import { fetchCategories, fetchProducts } from '../../store/products/actions';
+import { fetchCategories } from '../../store/products/actions';
 import { INavigation } from '../../types';
 
 import { styles } from './styles';
@@ -19,7 +19,6 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
   useEffect(() => {
     if (loginCreds) {
       dispatch(fetchCategories());
-      dispatch(fetchProducts());
     }
   }, [loginCreds]);
 

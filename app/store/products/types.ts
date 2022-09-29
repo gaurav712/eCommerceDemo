@@ -1,3 +1,13 @@
+export interface IProductFetchParams {
+  category?: string;
+  limit?: number;
+  skip?: number;
+}
+
+export interface IProductResponse {
+  products: IProductModel[];
+}
+
 export interface IProductsState {
   readonly categories: [];
   readonly productList: IProductModel[];
@@ -21,6 +31,7 @@ export interface IError {
 export const actionTypes = {
   FETCH_PRODUCTS_PENDING: 'FETCH_PRODUCTS_PENDING',
   FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
+  FETCH_PRODUCTS_ADD_SUCCESS: 'FETCH_PRODUCTS_ADD_SUCCESS',
   FETCH_PRODUCTS_FAILURE: 'FETCH_PRODUCTS_FAILURE',
 
   FETCH_CATEGORIES_PENDING: 'FETCH_CATEGORIES_PENDING',

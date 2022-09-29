@@ -1,14 +1,19 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { all } from '@redux-saga/core/effects';
 import { getProducts, getCategories } from './services';
-import { actionTypes, IError, IProductModel } from './types';
+import { actionTypes, IError, IProductFetchParams, IProductResponse } from './types';
 
 /*function generator implementations of Saga */
-function* fetchingProducts() {
+function* fetchingProducts({ params }: { params: IProductFetchParams }) {
   try {
-    const { data }: { data: IProductModel[] } = yield call(getProducts); // saga
+    const { data }: { data: IProductResponse } = yield call(getProducts, params); // saga
 
-    yield put({ type: actionTypes.FETCH_PRODUCTS_SUCCESS, payload: data.products });
+    const { skip } = params;
+    if (skip) {
+      yield put({ type: actionTypes.FETCH_PRODUCTS_ADD_SUCCESS, payload: data.products });
+    } else {
+      yield put({ type: actionTypes.FETCH_PRODUCTS_SUCCESS, payload: data.products });
+    }
   } catch (e) {
     yield put({
       type: actionTypes.FETCH_PRODUCTS_FAILURE,
@@ -21,7 +26,7 @@ function* fetchingCategories() {
   try {
     const { data }: { data: any } = yield call(getCategories); // saga
 
-    if(!data?.status) throw 'failed to fetch categories!';
+    if (!data?.status) throw 'failed to fetch categories!';
 
     yield put({ type: actionTypes.FETCH_CATEGORIES_SUCCESS, payload: data.categories });
   } catch (e) {

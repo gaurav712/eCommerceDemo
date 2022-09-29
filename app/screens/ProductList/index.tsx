@@ -1,20 +1,31 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, SafeAreaView, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { IApplicationState } from '../../store';
+import { fetchProducts } from '../../store/products/actions';
 import { IProductModel } from '../../store/products/types';
+import { INavigation } from '../../types';
 
 import { styles } from './styles';
 
-const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }) => {
-  const { productList } = useSelector((state: IApplicationState) => state.productsReducer);
+const ProductList = ({ navigation }: { navigation: INavigation }) => {
+  const dispatch = useDispatch();
+  const { productList, isLoading } = useSelector(
+    (state: IApplicationState) => state.productsReducer,
+  );
 
   const [category, setCategory] = useState('');
 
   useEffect(() => {
     if (navigation) {
-      //@ts-ignore
       const navigationState = navigation.getState();
       const { index } = navigationState;
       const { category } = navigationState.routes[index].params;
@@ -22,8 +33,33 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
     }
   }, [navigation]);
 
+  const getProducts = () => {
+    const limit = 20; // default limit
+    const skip = productList.filter((product) => product.category === category).length;
+    dispatch(
+      fetchProducts({
+        category,
+        limit,
+        skip,
+      }),
+    );
+  };
+
+  useEffect(() => {
+    if (category) {
+      getProducts();
+    }
+  }, [category]);
+
+  if (isLoading && !productList.length) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size={'large'} />
+      </View>
+    );
+  }
+
   const handleOnPress = (product: IProductModel) => {
-    //@ts-ignore
     navigation.navigate('Details', { product });
   };
 
@@ -45,6 +81,9 @@ const ProductList = ({ navigation }: { navigation: NativeStackScreenProps<any> }
         data={productList.filter((item) => item.category === category)}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
+        onEndReached={getProducts}
+        onEndReachedThreshold={0.25}
+        ListFooterComponent={() => <ActivityIndicator size={'large'} />}
       />
     </SafeAreaView>
   );
