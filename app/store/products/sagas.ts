@@ -39,6 +39,7 @@ function* fetchingCategories() {
 
 /* Saga watches the actions */
 function* watchFetchingProducts() {
+  // @ts-ignore
   yield takeEvery(actionTypes.FETCH_PRODUCTS_PENDING, fetchingProducts);
 }
 function* watchFetchingCategories() {
