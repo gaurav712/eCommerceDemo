@@ -46,7 +46,7 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList data={categories} renderItem={renderItem} keyExtractor={(_, index) => index} />
+      <FlatList data={categories} renderItem={renderItem} keyExtractor={(_, index) => `${index}`} />
     </SafeAreaView>
   );
 };
