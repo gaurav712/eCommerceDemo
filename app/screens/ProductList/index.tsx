@@ -4,6 +4,7 @@ import {
   FlatList,
   Image,
   Pressable,
+  RefreshControl,
   SafeAreaView,
   Text,
   View,
@@ -33,9 +34,11 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
     }
   }, [navigation]);
 
-  const getProducts = () => {
+  const getProducts = ({ refresh = false }: { refresh?: boolean }) => {
     const limit = 20; // default limit
-    const skip = productList.filter((product) => product.category === category).length;
+    const skip = refresh
+      ? 0
+      : productList.filter((product) => product.category === category).length;
     dispatch(
       fetchProducts({
         category,
@@ -47,7 +50,7 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
 
   useEffect(() => {
     if (category) {
-      getProducts();
+      getProducts({});
     }
   }, [category]);
 
@@ -81,9 +84,12 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
         data={productList.filter((item) => item.category === category)}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
-        onEndReached={getProducts}
+        onEndReached={() => getProducts({})}
         onEndReachedThreshold={0.25}
         ListFooterComponent={() => <ActivityIndicator size={'large'} />}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={() => getProducts({ refresh: true })} />
+        }
       />
     </SafeAreaView>
   );
