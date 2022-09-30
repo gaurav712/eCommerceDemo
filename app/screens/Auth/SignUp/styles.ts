@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../config';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   directionText: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#606060',
+    color: Colors.foregroundSecondary,
   },
   headingContainer: {
     flexDirection: 'row',
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   headingText: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#404040',
+    color: Colors.foreground,
   },
   dot: {
     width: 6,
@@ -29,34 +30,34 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     marginLeft: 2.5,
     marginBottom: 6,
-    backgroundColor: '#ea726b',
+    backgroundColor: Colors.accent,
   },
   loginTextContainer: {
     flexDirection: 'row',
   },
   loginText: {
-    color: '#606060',
+    color: Colors.foregroundSecondary,
   },
   loginLinkText: {
-    color: 'teal',
+    color: Colors.accentSecondary,
   },
   inputContainer: {
     marginVertical: 15,
   },
   registerButton: {
-    backgroundColor: '#ea726b',
+    backgroundColor: Colors.accent,
     width: '80%',
     padding: 15,
     alignItems: 'center',
     borderRadius: 10,
     marginBottom: 20,
-    shadowColor: '#ea726b',
+    shadowColor: Colors.accent,
     elevation: 10,
     shadowRadius: 10,
   },
   registerButtonText: {
     fontWeight: 'bold',
-    color: '#fff',
+    color: Colors.foregroundDark,
     fontSize: 16,
   },
 });

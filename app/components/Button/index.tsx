@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
+import { Colors } from '../../config';
 
 import styles from './styles';
 
@@ -15,14 +16,14 @@ const Button = ({ onSubmit, isLoading = false, label }: IProps) => {
       style={[
         styles.container,
         {
-          backgroundColor: isLoading ? '#ddd' : '#ea726b',
-          shadowColor: isLoading ? '#ddd' : '#ea726b',
+          backgroundColor: isLoading ? Colors.backgroundSecondary : Colors.accent,
+          shadowColor: isLoading ? Colors.backgroundSecondary : Colors.accent,
         },
       ]}
       onPress={onSubmit}
       disabled={isLoading}>
       {isLoading ? (
-        <ActivityIndicator size={25} color={'#ea726b'} />
+        <ActivityIndicator size={25} color={Colors.accent} />
       ) : (
         <Text style={styles.labelText}>{label}</Text>
       )}

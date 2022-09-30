@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../config';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.foregroundDark,
   },
   scrollContainer: {
     padding: 10,
@@ -32,11 +33,11 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   addCart: {
-    backgroundColor: 'teal',
+    backgroundColor: Colors.accentSecondary,
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
   addCartText: {
-    color: '#fff',
+    color: Colors.foregroundDark,
   },
 });

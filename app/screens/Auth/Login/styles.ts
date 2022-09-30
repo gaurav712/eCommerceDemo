@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../config';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderStyle: 'solid',
     backgroundColor: 'transparent',
-    borderTopColor: '#ea726b',
+    borderTopColor: Colors.accent,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
@@ -44,12 +45,12 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 3,
     marginBottom: 12,
-    backgroundColor: '#ea726b',
+    backgroundColor: Colors.accent,
   },
   greetingSec: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#606060',
+    color: Colors.foregroundSecondary,
   },
   inputContainer: {
     marginVertical: 15,
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   },
   registerText: {},
   registerLinkText: {
-    color: 'teal',
+    color: Colors.accentSecondary,
   },
 });
 
