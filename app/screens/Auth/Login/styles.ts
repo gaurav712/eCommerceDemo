@@ -59,22 +59,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   recoveryText: {},
-  loginButton: {
-    backgroundColor: '#ea726b',
-    width: '80%',
-    padding: 15,
-    alignItems: 'center',
-    borderRadius: 10,
-    marginBottom: 20,
-    shadowColor: '#ea726b',
-    elevation: 10,
-    shadowRadius: 10,
-  },
-  loginButtonText: {
-    fontWeight: 'bold',
-    color: '#fff',
-    fontSize: 16,
-  },
   loginBottomDividerText: {},
   registerTextContainer: {
     flexDirection: 'row',

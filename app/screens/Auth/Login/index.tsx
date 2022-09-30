@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
 import { IApplicationState } from '../../../store';
 import { login } from '../../../store/auth/actions';
@@ -11,7 +12,7 @@ import styles from './styles';
 
 const Login = ({ navigation }: { navigation: INavigation }) => {
   const dispatch = useDispatch();
-  const { loginCreds } = useSelector((state: IApplicationState) => state.authReducer);
+  const { loginCreds, isLoading } = useSelector((state: IApplicationState) => state.authReducer);
 
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -81,9 +82,7 @@ const Login = ({ navigation }: { navigation: INavigation }) => {
           <Text style={styles.recoveryText}>Recovery Password</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.loginButton} onPress={handleLogIn}>
-        <Text style={styles.loginButtonText}>Sign In</Text>
-      </Pressable>
+      <Button onSubmit={handleLogIn} label={'Sign In'} isLoading={isLoading} />
       <View style={styles.registerTextContainer}>
         <Text style={styles.registerText}>Not a member? </Text>
         <Pressable onPress={handleRegisterClicked}>
