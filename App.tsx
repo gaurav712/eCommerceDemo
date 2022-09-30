@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import AppWithNavigation from './app/navigation';
 import store from './app/store';
@@ -9,6 +10,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
+      <StatusBar backgroundColor={'#ea726b'} />
       <AppWithNavigation />
     </Provider>
   );
