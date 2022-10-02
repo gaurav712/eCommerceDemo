@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     marginVertical: 7.5,
     width: dimensions.width * 0.8,
     paddingHorizontal: 15,
+    elevation: 1,
   },
   icon: {
     position: 'absolute',
