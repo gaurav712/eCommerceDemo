@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   flatlistHeader: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   itemContainer: {
     marginHorizontal: '2.5%',
