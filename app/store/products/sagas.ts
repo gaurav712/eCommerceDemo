@@ -24,7 +24,54 @@ function* fetchingProducts({ params }: { params: IProductFetchParams }) {
 
 function* fetchingCategories() {
   try {
-    const { data }: { data: any } = yield call(getCategories); // saga
+    //const { data }: { data: any } = yield call(getCategories); // saga
+    const data = {
+      status: true,
+      categories: [
+        {
+          category: 'Headphones',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png/v1/fill/w_165,h_187,fp_0.50_0.50/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png',
+        },
+        {
+          category: 'Speakers',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png/v1/fill/w_180,h_180,fp_0.50_0.50/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png',
+        },
+        {
+          category: 'Cell Phones and accessories',
+          image: 'https://hotemoji.com/images/emoji/5/6l3ep9b9jl5.png',
+        },
+        {
+          category: 'Headphones',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png/v1/fill/w_165,h_187,fp_0.50_0.50/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png',
+        },
+        {
+          category: 'Speakers',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png/v1/fill/w_180,h_180,fp_0.50_0.50/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png',
+        },
+        {
+          category: 'Cell Phones and accessories',
+          image: 'https://hotemoji.com/images/emoji/5/6l3ep9b9jl5.png',
+        },
+        {
+          category: 'Headphones',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png/v1/fill/w_165,h_187,fp_0.50_0.50/2cd43b_c2f357568a8d4e6daa483796dd4450ad~mv2_d_2561_2910_s_4_2.png',
+        },
+        {
+          category: 'Speakers',
+          image:
+            'https://static.wixstatic.com/media/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png/v1/fill/w_180,h_180,fp_0.50_0.50/2cd43b_c5777b3867a9491585e433ecb063e16f~mv2.png',
+        },
+        {
+          category: 'Cell Phones and accessories',
+          image: 'https://hotemoji.com/images/emoji/5/6l3ep9b9jl5.png',
+        },
+      ],
+    };
 
     if (!data?.status) throw 'failed to fetch categories!';
 
