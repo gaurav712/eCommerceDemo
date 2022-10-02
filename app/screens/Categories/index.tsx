@@ -1,7 +1,17 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import GradientBackground from '../../components/GradientBackground';
+import CategoriesCover from '../../components/Svg/CategoriesCover';
 import { IApplicationState } from '../../store';
 import { fetchCategories } from '../../store/products/actions';
 import { INavigation } from '../../types';
@@ -30,24 +40,47 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
     );
   }
 
-  const handleOnPress = (category: string) => {
+  const handleOnPress = (category: any) => {
     navigation.navigate('List', {
-      category,
+      category: category.category,
     });
   };
 
-  const Item = ({ category }: { category: string }) => (
+  const Item = ({ category }: { category: any }) => (
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(category)}>
-      <Text style={styles.itemTitle}>{category}</Text>
+      <Image
+        source={{ uri: category.image }}
+        style={{
+          width: '100%',
+          height: 50,
+          resizeMode: 'contain',
+        }}
+      />
+      <Text style={styles.itemTitle}>{category.category}</Text>
     </Pressable>
   );
 
   const renderItem = ({ item }: { item: string }) => <Item category={item} />;
 
+  const FlatlistHeader = () => (
+    <View style={styles.flatlistHeader}>
+      <Text style={styles.headingText}>{'Shop\nFor..'}</Text>
+      <CategoriesCover />
+    </View>
+  );
+
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList data={categories} renderItem={renderItem} keyExtractor={(_, index) => `${index}`} />
-    </SafeAreaView>
+    <GradientBackground>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={categories}
+          renderItem={renderItem}
+          keyExtractor={(_, index) => `${index}`}
+          numColumns={2}
+          ListHeaderComponent={<FlatlistHeader />}
+        />
+      </SafeAreaView>
+    </GradientBackground>
   );
 };
 

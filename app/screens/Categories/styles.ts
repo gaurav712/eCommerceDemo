@@ -1,18 +1,30 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../config';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    //alignItems: 'center',
     padding: 10,
   },
+  headingText: {
+    position: 'absolute',
+    right: '20%',
+    color: Colors.foreground,
+    fontSize: 32,
+  },
+  flatlistHeader: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
   itemContainer: {
-    margin: 5,
+    marginHorizontal: '2.5%',
+    marginVertical: 5,
     padding: 10,
-    elevation: 5,
-    backgroundColor: 'white',
+    elevation: 10,
+    backgroundColor: Colors.foregroundDark,
     borderRadius: 5,
+    width: '45%',
   },
   itemTitle: {},
 });
