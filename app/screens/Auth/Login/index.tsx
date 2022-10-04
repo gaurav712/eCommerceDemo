@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../../components/Button';
+import GradientBackground from '../../../components/GradientBackground';
 import TextInput from '../../../components/TextInput';
 import { IApplicationState } from '../../../store';
 import { login } from '../../../store/auth/actions';
@@ -55,41 +56,43 @@ const Login = ({ navigation }: { navigation: INavigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.greetingContainer}>
-        <View style={styles.greeting}>
-          <Text style={styles.greetingText}>Hello Again</Text>
-          <View style={styles.symbolContainer}>
-            <View style={styles.verticalBar} />
-            <View style={styles.dot} />
+    <GradientBackground>
+      <View style={styles.container}>
+        <View style={styles.greetingContainer}>
+          <View style={styles.greeting}>
+            <Text style={styles.greetingText}>Hello Again</Text>
+            <View style={styles.symbolContainer}>
+              <View style={styles.verticalBar} />
+              <View style={styles.dot} />
+            </View>
           </View>
+          <Text style={styles.greetingSec}>{"Welcome back you've\nbeen missed!"}</Text>
         </View>
-        <Text style={styles.greetingSec}>{"Welcome back you've\nbeen missed!"}</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Enter Email"
+            value={userEmail}
+            onChangeText={handleChangeUsername}
+          />
+          <TextInput
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={handleChangePass}
+          />
+          <Pressable style={styles.recoveryButton} onPress={handleRecoverPass}>
+            <Text style={styles.recoveryText}>Recovery Password</Text>
+          </Pressable>
+        </View>
+        <Button onSubmit={handleLogIn} label={'Sign In'} isLoading={isLoading} />
+        <View style={styles.registerTextContainer}>
+          <Text style={styles.registerText}>Not a member? </Text>
+          <Pressable onPress={handleRegisterClicked}>
+            <Text style={styles.registerLinkText}>Register now</Text>
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Enter Email"
-          value={userEmail}
-          onChangeText={handleChangeUsername}
-        />
-        <TextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={handleChangePass}
-        />
-        <Pressable style={styles.recoveryButton} onPress={handleRecoverPass}>
-          <Text style={styles.recoveryText}>Recovery Password</Text>
-        </Pressable>
-      </View>
-      <Button onSubmit={handleLogIn} label={'Sign In'} isLoading={isLoading} />
-      <View style={styles.registerTextContainer}>
-        <Text style={styles.registerText}>Not a member? </Text>
-        <Pressable onPress={handleRegisterClicked}>
-          <Text style={styles.registerLinkText}>Register now</Text>
-        </Pressable>
-      </View>
-    </View>
+    </GradientBackground>
   );
 };
 

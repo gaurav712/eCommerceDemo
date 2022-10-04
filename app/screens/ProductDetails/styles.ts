@@ -1,14 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Colors } from '../../config';
+
+const dimensions = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.foregroundDark,
   },
   scrollContainer: {
-    padding: 10,
     alignItems: 'center',
+  },
+  imageContainer: {
+    backgroundColor: Colors.foregroundDark,
+    width: dimensions.width,
+    alignItems: 'center',
+    padding: 10,
+    elevation: 5,
   },
   image: {
     width: '80%',
@@ -16,7 +23,6 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   infoContainer: {
-    flex: 1,
     marginVertical: 10,
     padding: 10,
   },

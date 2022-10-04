@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import GradientBackground from '../../components/GradientBackground';
 import { IApplicationState } from '../../store';
 import { fetchProducts } from '../../store/products/actions';
 import { IProductModel } from '../../store/products/types';
@@ -79,19 +80,24 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
   const renderItem = ({ item }: { item: IProductModel }) => <Item product={item} />;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={productList.filter((item) => item.category === category)}
-        renderItem={renderItem}
-        keyExtractor={(item) => item._id}
-        onEndReached={() => getProducts({})}
-        onEndReachedThreshold={0.25}
-        ListFooterComponent={() => <ActivityIndicator size={'large'} />}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={() => getProducts({ refresh: true })} />
-        }
-      />
-    </SafeAreaView>
+    <GradientBackground>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={productList.filter((item) => item.category === category)}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+          onEndReached={() => getProducts({})}
+          onEndReachedThreshold={0.25}
+          ListFooterComponent={() => <ActivityIndicator size={'large'} />}
+          refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={() => getProducts({ refresh: true })}
+            />
+          }
+        />
+      </SafeAreaView>
+    </GradientBackground>
   );
 };
 
