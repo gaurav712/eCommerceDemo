@@ -48,15 +48,10 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
 
   const Item = ({ category }: { category: any }) => (
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(category)}>
-      <Image
-        source={{ uri: category.image }}
-        style={{
-          width: '100%',
-          height: 50,
-          resizeMode: 'contain',
-        }}
-      />
-      <Text style={styles.itemTitle}>{category.category}</Text>
+      <Image source={{ uri: category.image }} style={styles.itemImage} />
+      <View style={styles.itemTitleContainer}>
+        <Text style={styles.itemTitle}>{category.category}</Text>
+      </View>
     </Pressable>
   );
 
