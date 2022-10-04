@@ -14,3 +14,11 @@ export const addProductToCart = async ({ productId }: { productId: string }) => 
   });
   return res;
 };
+
+export const getCart = async () => {
+  const token: string = (await AsyncStorage.getItem('token')) as string;
+  const res = await axios.post('/cart', {
+    token,
+  });
+  return res;
+};

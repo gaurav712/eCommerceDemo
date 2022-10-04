@@ -10,3 +10,7 @@ export const addToCart = (productId: string) => ({
   productId,
   type: actionTypes.ADD_CART_PENDING,
 });
+
+export const getCart = () => ({
+  type: actionTypes.GET_CART_PENDING,
+});

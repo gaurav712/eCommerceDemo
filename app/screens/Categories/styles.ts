@@ -46,4 +46,16 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.foreground,
   },
+  floatingCartButton: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    backgroundColor: Colors.foregroundDark,
+    elevation: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

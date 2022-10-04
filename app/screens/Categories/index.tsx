@@ -8,10 +8,12 @@ import {
   Text,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import GradientBackground from '../../components/GradientBackground';
 import CategoriesCover from '../../components/Svg/CategoriesCover';
+import { Colors } from '../../config';
 import { IApplicationState } from '../../store';
 import { fetchCategories } from '../../store/products/actions';
 import { INavigation } from '../../types';
@@ -46,6 +48,10 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
     });
   };
 
+  const handleCartButtonClicked = () => {
+    navigation.navigate('Cart');
+  };
+
   const Item = ({ category }: { category: any }) => (
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(category)}>
       <Image source={{ uri: category.image }} style={styles.itemImage} />
@@ -74,6 +80,9 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
           numColumns={2}
           ListHeaderComponent={<FlatlistHeader />}
         />
+        <Pressable style={styles.floatingCartButton} onPress={handleCartButtonClicked}>
+          <Icon name={'shopping-cart'} size={25} color={Colors.accent} />
+        </Pressable>
       </SafeAreaView>
     </GradientBackground>
   );

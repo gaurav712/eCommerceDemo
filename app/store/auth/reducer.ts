@@ -9,6 +9,8 @@ const initialState: IAuthState = {
     token: '',
   },
   isLoading: false,
+  cart: [],
+  cartLoading: false,
   error: '',
 };
 
@@ -31,6 +33,14 @@ export const authReducer = (state = initialState, action: IAction) => {
       return { ...state, isLoading: false, categories: action.payload };
     case actionTypes.ADD_CART_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
+
+    case actionTypes.GET_CART_PENDING:
+      return { ...state, cartLoading: true };
+    case actionTypes.GET_CART_SUCCESS:
+      return { ...state, cartLoading: false, cart: action.payload };
+    case actionTypes.GET_CART_FAILURE:
+      return { ...state, cartLoading: false, error: action.payload };
+
     default:
       return state;
   }

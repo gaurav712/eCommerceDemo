@@ -1,6 +1,8 @@
 export interface IAuthState {
   readonly loginCreds: IAuthUserData;
   readonly isLoading: boolean;
+  readonly cart: [];
+  readonly cartLoading: boolean;
   readonly error: string;
 }
 
@@ -38,4 +40,8 @@ export const actionTypes = {
   ADD_CART_PENDING: 'ADD_CART_PENDING',
   ADD_CART_SUCCESS: 'ADD_CART_SUCCESS',
   ADD_CART_FAILURE: 'ADD_CART_FAILURE',
+
+  GET_CART_PENDING: 'GET_CART_PENDING',
+  GET_CART_SUCCESS: 'GET_CART_SUCCESS',
+  GET_CART_FAILURE: 'GET_CART_FAILURE',
 };
