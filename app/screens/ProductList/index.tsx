@@ -51,7 +51,7 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
 
   useEffect(() => {
     if (category) {
-      getProducts({});
+      getProducts({ refresh: true });
     }
   }, [category]);
 
