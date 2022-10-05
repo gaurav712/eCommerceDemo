@@ -64,7 +64,9 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
     <Pressable style={styles.itemContainer} onPress={() => handleOnPress(product)}>
       <Image source={{ uri: product.imagePath }} style={styles.image} />
       <View style={styles.infoContainer}>
-        <Text style={styles.itemTitle}>{product.productName}</Text>
+        <Text style={styles.itemTitle} numberOfLines={2}>
+          {product.productName}
+        </Text>
         <Text style={styles.price}>₹{product.unitPrice}</Text>
       </View>
     </Pressable>
@@ -79,8 +81,10 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
           data={productList.filter((item) => item.category === category)}
           renderItem={renderItem}
           keyExtractor={(item) => item._id}
+          numColumns={3}
           onEndReached={() => getProducts({})}
           onEndReachedThreshold={0.25}
+          ListHeaderComponent={<Text style={styles.headingText}>{category}</Text>}
           ListFooterComponent={() => <Loader size={'large'} />}
           refreshControl={
             <RefreshControl
