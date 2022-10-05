@@ -1,6 +1,7 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Colors } from '../../config';
+import Loader from '../Loader';
 
 import styles from './styles';
 
@@ -22,11 +23,7 @@ const Button = ({ onSubmit, isLoading = false, label }: IProps) => {
       ]}
       onPress={onSubmit}
       disabled={isLoading}>
-      {isLoading ? (
-        <ActivityIndicator size={25} color={Colors.accent} />
-      ) : (
-        <Text style={styles.labelText}>{label}</Text>
-      )}
+      {isLoading ? <Loader size={25} /> : <Text style={styles.labelText}>{label}</Text>}
     </Pressable>
   );
 };

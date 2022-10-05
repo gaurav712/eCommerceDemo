@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, FlatList, Image, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import GradientBackground from '../../components/GradientBackground';
+import Loader from '../../components/Loader';
 import { IApplicationState } from '../../store';
 import { getCart } from '../../store/auth/actions';
 import { IProductModel } from '../../store/products/types';
@@ -20,7 +21,7 @@ const Cart = () => {
   if (cartLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size={'large'} />
+        <Loader size={'large'} />
       </View>
     );
   }

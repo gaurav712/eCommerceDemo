@@ -1,17 +1,10 @@
 import React, { useEffect } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Pressable,
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Image, Pressable, SafeAreaView, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import GradientBackground from '../../components/GradientBackground';
+import Loader from '../../components/Loader';
 import CategoriesCover from '../../components/Svg/CategoriesCover';
 import { Colors } from '../../config';
 import { IApplicationState } from '../../store';
@@ -37,7 +30,7 @@ const Categories = ({ navigation }: { navigation: INavigation }) => {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size={'large'} />
+        <Loader size={'large'} />
       </View>
     );
   }

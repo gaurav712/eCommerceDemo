@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Pressable,
-  RefreshControl,
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Image, Pressable, RefreshControl, SafeAreaView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import GradientBackground from '../../components/GradientBackground';
+import Loader from '../../components/Loader';
 import { IApplicationState } from '../../store';
 import { fetchProducts } from '../../store/products/actions';
 import { IProductModel } from '../../store/products/types';
@@ -58,7 +50,7 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
   if (isLoading && !productList.length) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size={'large'} />
+        <Loader size={'large'} />
       </View>
     );
   }
@@ -88,7 +80,7 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
           keyExtractor={(item) => item._id}
           onEndReached={() => getProducts({})}
           onEndReachedThreshold={0.25}
-          ListFooterComponent={() => <ActivityIndicator size={'large'} />}
+          ListFooterComponent={() => <Loader size={'large'} />}
           refreshControl={
             <RefreshControl
               refreshing={isLoading}
