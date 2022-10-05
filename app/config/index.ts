@@ -6,4 +6,5 @@ export const Colors = {
   foregroundSecondary: '#606060',
   foregroundDark: '#ffffff',
   accentSecondary: 'teal',
+  green: 'green',
 };
