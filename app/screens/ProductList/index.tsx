@@ -3,6 +3,7 @@ import { FlatList, Image, Pressable, RefreshControl, SafeAreaView, Text, View } 
 import { useDispatch, useSelector } from 'react-redux';
 import GradientBackground from '../../components/GradientBackground';
 import Loader from '../../components/Loader';
+import { Colors } from '../../config';
 import { IApplicationState } from '../../store';
 import { fetchProducts } from '../../store/products/actions';
 import { IProductModel } from '../../store/products/types';
@@ -85,6 +86,7 @@ const ProductList = ({ navigation }: { navigation: INavigation }) => {
             <RefreshControl
               refreshing={isLoading}
               onRefresh={() => getProducts({ refresh: true })}
+              colors={[Colors.accent]}
             />
           }
         />
