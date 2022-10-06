@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
+import { gradientColors } from '../../config';
 
-const FROM_COLOR = '#fff';
-const TO_COLOR = `#fceae9`;
+const FROM_COLOR = gradientColors.start;
+const TO_COLOR = gradientColors.end;
 
 const GradientBackground = ({ children }: { children: ReactNode }) => {
   return (

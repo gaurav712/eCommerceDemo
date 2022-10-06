@@ -8,3 +8,8 @@ export const Colors = {
   accentSecondary: 'teal',
   green: 'green',
 };
+
+export const gradientColors = {
+  start: '#fff',
+  end: '#fceae9',
+};
