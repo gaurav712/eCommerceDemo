@@ -41,7 +41,12 @@ const Cart = () => {
   return (
     <GradientBackground>
       <SafeAreaView style={styles.container}>
-        <FlatList data={cart} renderItem={renderItem} keyExtractor={(_, index) => `${index}`} />
+        <FlatList
+          data={cart}
+          renderItem={renderItem}
+          keyExtractor={(_, index) => `${index}`}
+          ListHeaderComponent={<Text style={styles.headingText}>Your Cart</Text>}
+        />
       </SafeAreaView>
     </GradientBackground>
   );

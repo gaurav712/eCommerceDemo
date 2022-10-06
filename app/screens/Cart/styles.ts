@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 10,
   },
+  headingText: {
+    fontSize: 30,
+    marginHorizontal: 5,
+    marginVertical: 15,
+  },
   itemContainer: {
     flexDirection: 'row',
     margin: 5,
