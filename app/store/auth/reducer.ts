@@ -28,11 +28,11 @@ export const authReducer = (state = initialState, action: IAction) => {
       return { ...state, isLoading: false, error: action.payload };
 
     case actionTypes.ADD_CART_PENDING:
-      return { ...state, isLoading: true };
+      return { ...state, cartLoading: true };
     case actionTypes.ADD_CART_SUCCESS:
-      return { ...state, isLoading: false, categories: action.payload };
+      return { ...state, cartLoading: false };
     case actionTypes.ADD_CART_FAILURE:
-      return { ...state, isLoading: false, error: action.payload };
+      return { ...state, cartLoading: false, error: action.payload };
 
     case actionTypes.GET_CART_PENDING:
       return { ...state, cartLoading: true };
