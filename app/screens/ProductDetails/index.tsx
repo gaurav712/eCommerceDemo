@@ -1,14 +1,17 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../components/Button';
 import GradientBackground from '../../components/GradientBackground';
+import { IApplicationState } from '../../store';
 import { addToCart } from '../../store/auth/actions';
 import { IProductModel } from '../../store/products/types';
 import { styles } from './styles';
 
 const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any> }) => {
   const [product, setProduct] = useState<IProductModel>();
+  const { cartLoading } = useSelector((state: IApplicationState) => state.authReducer);
 
   useEffect(() => {
     if (navigation) {
@@ -40,10 +43,10 @@ const ProductDetails = ({ navigation }: { navigation: NativeStackScreenProps<any
             <Text style={styles.price}>₹{product?.unitPrice}</Text>
             <Text style={styles.description}>{product?.description}</Text>
           </View>
-          <Pressable style={styles.addCart} onPress={handleAddCart}>
-            <Text style={styles.addCartText}>{'Add to Cart'}</Text>
-          </Pressable>
         </ScrollView>
+        <View style={styles.addCart}>
+          <Button label={'Add to Cart'} isLoading={cartLoading} onSubmit={handleAddCart} />
+        </View>
       </SafeAreaView>
     </GradientBackground>
   );

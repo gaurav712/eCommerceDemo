@@ -39,9 +39,8 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   addCart: {
-    backgroundColor: Colors.accentSecondary,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+    width: '100%',
+    alignItems: 'center',
   },
   addCartText: {
     color: Colors.foregroundDark,
