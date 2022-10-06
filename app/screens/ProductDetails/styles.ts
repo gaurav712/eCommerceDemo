@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { Colors } from '../../config';
+import { Colors, gradientColors } from '../../config';
 
 const dimensions = Dimensions.get('window');
 
@@ -40,6 +40,10 @@ export const styles = StyleSheet.create({
   },
   addCart: {
     width: '100%',
+    paddingTop: 10,
+    marginBottom: -10,
     alignItems: 'center',
+    elevation: 5,
+    backgroundColor: gradientColors.end,
   },
 });
