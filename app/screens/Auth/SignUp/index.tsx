@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../../components/Button';
 import GradientBackground from '../../../components/GradientBackground';
 import CustomTextInput from '../../../components/TextInput';
+import { IApplicationState } from '../../../store';
+import { signUp } from '../../../store/auth/actions';
 import { INavigation } from '../../../types';
 import styles from './styles';
 
 const SignUp = ({ navigation }: { navigation: INavigation }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const dispatch = useDispatch();
+  const { loginCreds, isLoading } = useSelector((state: IApplicationState) => state.authReducer);
 
-  const handleFirstNameChange = (value: string) => {
-    setFirstName(value);
+  const [username, setUsername] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const _storeToken = async (token: string) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+    } catch (error) {
+      console.log('error saving token');
+    }
   };
 
-  const handleLastNameChange = (value: string) => {
-    setLastName(value);
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
   };
 
   const handleEmailChange = (value: string) => {
-    setEmail(value);
+    setUserEmail(value);
   };
 
   const handlePassChange = (value: string) => {
-    setPass(value);
+    setPassword(value);
   };
 
   const handleLoginClicked = () => {
@@ -33,13 +44,19 @@ const SignUp = ({ navigation }: { navigation: INavigation }) => {
 
   const handleRegister = () => {
     const userData = {
-      firstName,
-      lastName,
-      email,
-      pass,
+      username,
+      userEmail,
+      password,
     };
-    console.log(userData);
+    dispatch(signUp(userData));
   };
+
+  useEffect(() => {
+    if (loginCreds.token) {
+      _storeToken(loginCreds.token);
+      navigation.navigate('Home'); // Authenticated
+    }
+  }, [loginCreds.token]);
 
   return (
     <GradientBackground>
@@ -59,26 +76,23 @@ const SignUp = ({ navigation }: { navigation: INavigation }) => {
         </View>
         <View style={styles.inputContainer}>
           <CustomTextInput
-            placeholder={'First Name'}
-            value={firstName}
-            onChangeText={handleFirstNameChange}
+            placeholder={'Username'}
+            value={username}
+            onChangeText={handleUsernameChange}
           />
           <CustomTextInput
-            placeholder={'Last Name'}
-            value={lastName}
-            onChangeText={handleLastNameChange}
+            placeholder={'e-Mail'}
+            value={userEmail}
+            onChangeText={handleEmailChange}
           />
-          <CustomTextInput placeholder={'e-Mail'} value={email} onChangeText={handleEmailChange} />
           <CustomTextInput
             placeholder={'Password'}
-            value={pass}
+            value={password}
             onChangeText={handlePassChange}
             secureTextEntry={true}
           />
         </View>
-        <Pressable style={styles.registerButton} onPress={handleRegister}>
-          <Text style={styles.registerButtonText}>Create account</Text>
-        </Pressable>
+        <Button label={'Create Account'} isLoading={isLoading} onSubmit={handleRegister} />
       </View>
     </GradientBackground>
   );

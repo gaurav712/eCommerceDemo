@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { all } from '@redux-saga/core/effects';
-import { addProductToCart, getCart, logIn } from './services';
+import { addProductToCart, getCart, logIn, signUp } from './services';
 import { actionTypes, IAction, IAuthResult, IError } from './types';
 
 /*function generator implementations of Saga */
@@ -11,10 +11,26 @@ function* loggingIn(action: IAction) {
 
     if (!status) throw 'authorisation failed!';
 
-    yield put({ type: actionTypes.AUTH_SUCCESS, payload: user });
+    yield put({ type: actionTypes.LOGIN_SUCCESS, payload: user });
   } catch (e) {
     yield put({
-      type: actionTypes.AUTH_FAILURE,
+      type: actionTypes.LOGIN_FAILURE,
+      payload: (e as IError).message,
+    });
+  }
+}
+
+function* signingUp(action: IAction) {
+  try {
+    const { data }: { data: IAuthResult } = yield call(signUp, action.payload);
+    const { status, user } = data;
+
+    if (!status) throw 'authorisation failed!';
+
+    yield put({ type: actionTypes.SIGNUP_SUCCESS, payload: user });
+  } catch (e) {
+    yield put({
+      type: actionTypes.SIGNUP_FAILURE,
       payload: (e as IError).message,
     });
   }
@@ -53,7 +69,10 @@ function* fetchingCart() {
 
 /* Saga watches the actions */
 function* watchLoggingIn() {
-  yield takeEvery(actionTypes.AUTH_PENDING, loggingIn);
+  yield takeEvery(actionTypes.LOGIN_PENDING, loggingIn);
+}
+function* watchSigningUp() {
+  yield takeEvery(actionTypes.SIGNUP_PENDING, signingUp);
 }
 function* watchAddToCart() {
   yield takeEvery(actionTypes.ADD_CART_PENDING, addToCart);
@@ -64,5 +83,5 @@ function* watchFetchingCart() {
 
 /* Saga sends all the watchers to the sagaMiddleware to run. */
 export function* authSaga() {
-  yield all([watchLoggingIn(), watchAddToCart(), watchFetchingCart()]);
+  yield all([watchLoggingIn(), watchSigningUp(), watchAddToCart(), watchFetchingCart()]);
 }

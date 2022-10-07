@@ -3,7 +3,12 @@ import { ILoginCredsModel, actionTypes } from './types';
 
 export const login = (creds: ILoginCredsModel) => ({
   payload: creds,
-  type: actionTypes.AUTH_PENDING,
+  type: actionTypes.LOGIN_PENDING,
+});
+
+export const signUp = (creds: ILoginCredsModel) => ({
+  payload: creds,
+  type: actionTypes.SIGNUP_PENDING,
 });
 
 export const addToCart = (productId: string) => ({

@@ -20,11 +20,14 @@ interface IAction extends Action {
 
 export const authReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case actionTypes.AUTH_PENDING:
+    case actionTypes.LOGIN_PENDING:
+    case actionTypes.SIGNUP_PENDING:
       return { ...state, isLoading: true };
-    case actionTypes.AUTH_SUCCESS:
+    case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.SIGNUP_SUCCESS:
       return { ...state, isLoading: false, loginCreds: action.payload };
-    case actionTypes.AUTH_FAILURE:
+    case actionTypes.LOGIN_FAILURE:
+    case actionTypes.SIGNUP_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
 
     case actionTypes.ADD_CART_PENDING:

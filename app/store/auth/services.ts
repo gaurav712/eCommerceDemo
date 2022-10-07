@@ -7,6 +7,11 @@ export const logIn = async (loginCreds: ILoginCredsModel) => {
   return res;
 };
 
+export const signUp = async (signUpCreds: ILoginCredsModel) => {
+  const res = await axios.post('/signup', signUpCreds);
+  return res;
+};
+
 export const addProductToCart = async ({ productId }: { productId: string }) => {
   const token: string = (await AsyncStorage.getItem('token')) as string;
   const res = await axios.post(`/cart/${productId}`, {
