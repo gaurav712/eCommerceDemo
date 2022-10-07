@@ -7,6 +7,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 10,
   },
+  cartEmptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  cartEmptyText: {
+    alignSelf: 'center',
+    fontSize: 20,
+  },
   headingText: {
     fontSize: 30,
     marginHorizontal: 5,

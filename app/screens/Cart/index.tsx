@@ -41,12 +41,21 @@ const Cart = () => {
   return (
     <GradientBackground>
       <SafeAreaView style={styles.container}>
-        <FlatList
-          data={cart}
-          renderItem={renderItem}
-          keyExtractor={(_, index) => `${index}`}
-          ListHeaderComponent={<Text style={styles.headingText}>Your Cart</Text>}
-        />
+        {cart.length ? (
+          <FlatList
+            data={cart}
+            renderItem={renderItem}
+            keyExtractor={(_, index) => `${index}`}
+            ListHeaderComponent={<Text style={styles.headingText}>Your Cart</Text>}
+          />
+        ) : (
+          <View style={styles.cartEmptyContainer}>
+            <Text style={styles.headingText}>Your Cart</Text>
+            <View style={styles.cartEmptyContainer}>
+              <Text style={styles.cartEmptyText}>No items in cart!</Text>
+            </View>
+          </View>
+        )}
       </SafeAreaView>
     </GradientBackground>
   );
